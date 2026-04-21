@@ -345,6 +345,7 @@ function renderHome() {
   const splash = qs("splash");
   const mainApp = qs("mainApp");
   const startBtn = qs("startBtn");
+  let splashHideTimer = null;
 
   if (!todayDate || !mealList) {
     return;
@@ -462,10 +463,43 @@ function renderHome() {
   });
 
   if (splash && mainApp && startBtn) {
+    const syncSplashToScroll = () => {
+      if (!document.body.classList.contains("tracking-started")) {
+        return;
+      }
+
+      if (window.scrollY <= 24) {
+        window.clearTimeout(splashHideTimer);
+        splash.classList.remove("hidden", "splash-closing");
+        return;
+      }
+
+      splash.classList.add("splash-closing");
+      window.clearTimeout(splashHideTimer);
+      splashHideTimer = window.setTimeout(() => {
+        if (window.scrollY > 24) {
+          splash.classList.add("hidden");
+        }
+      }, 280);
+    };
+
+    window.addEventListener("scroll", syncSplashToScroll, { passive: true });
+
     startBtn.addEventListener("click", () => {
-      splash.classList.add("hidden");
+      if (document.body.classList.contains("tracking-started")) {
+        return;
+      }
+
+      document.body.classList.add("tracking-started");
       mainApp.classList.remove("hidden");
+      splash.classList.add("splash-closing");
       draw();
+
+      window.setTimeout(() => {
+        splash.classList.add("hidden");
+        mainApp.scrollIntoView({ behavior: "smooth", block: "start" });
+        syncSplashToScroll();
+      }, 420);
     });
   }
 }

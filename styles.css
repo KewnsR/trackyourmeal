@@ -34,6 +34,10 @@ body {
   min-height: 100vh;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .app-shell {
   max-width: 780px;
   margin: 0 auto;
@@ -64,6 +68,18 @@ body {
   min-height: calc(100vh - 28px);
   display: grid;
   place-items: center;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    max-height 0.35s ease,
+    margin 0.35s ease,
+    padding 0.35s ease;
+  overflow: hidden;
+}
+
+.splash-screen.splash-closing {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.98);
 }
 
 .splash-content {
@@ -101,6 +117,21 @@ body {
   display: grid;
   gap: 14px;
   padding-bottom: 78px;
+}
+
+.tracking-started .main-app {
+  animation: main-rise 0.45s ease;
+}
+
+@keyframes main-rise {
+  from {
+    opacity: 0.4;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .topbar {
