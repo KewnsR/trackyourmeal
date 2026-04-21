@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Meal - Track Your Meal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="add">
+    <div class="app-shell">
+      <main class="main-app" aria-live="polite">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Meal Entry</p>
+            <h2>Add a New Meal</h2>
+          </div>
+          <span class="badge">Track</span>
+        </header>
+
+        <nav class="card page-nav" aria-label="Primary navigation">
+          <a href="index.html" class="nav-btn">Home</a>
+          <a href="add.html" class="nav-btn active">Add Meal</a>
+          <a href="stats.html" class="nav-btn">Stats</a>
+          <a href="profile.html" class="nav-btn">Profile</a>
+        </nav>
+
+        <section class="card form-card">
+          <h3>Smart Food Entry</h3>
+          <label>
+            Food Name
+            <input
+              id="foodInput"
+              type="text"
+              placeholder="Egg, chicken breast, rice..."
+              list="foodOptions"
+            />
+            <datalist id="foodOptions"></datalist>
+          </label>
+          <div class="split-inputs split-mobile">
+            <label>
+              Quantity
+              <input
+                id="foodQuantity"
+                type="number"
+                min="0.25"
+                step="0.25"
+                value="1"
+              />
+            </label>
+            <label>
+              Size / Unit
+              <select id="foodUnit"></select>
+            </label>
+          </div>
+          <p id="foodEstimate" class="subtle">
+            Select a food to auto-calculate calories and protein.
+          </p>
+          <button
+            id="applyFoodEstimateBtn"
+            class="btn btn-secondary"
+            type="button"
+          >
+            Use Auto Values In Form
+          </button>
+        </section>
+
+        <form id="addMealForm" class="card form-card">
+          <h3>Add Meal</h3>
+          <label>
+            Meal Name
+            <input
+              id="mealName"
+              type="text"
+              placeholder="Chicken bowl"
+              required
+            />
+          </label>
+          <label>
+            Meal Type
+            <select id="mealType" required>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Pre-Workout">Pre-Workout</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Snack">Snack</option>
+            </select>
+          </label>
+          <div class="split-inputs">
+            <label>
+              Calories
+              <input
+                id="calories"
+                type="number"
+                min="1"
+                placeholder="450"
+                required
+              />
+            </label>
+            <label>
+              Protein (g)
+              <input
+                id="protein"
+                type="number"
+                min="1"
+                placeholder="35"
+                required
+              />
+            </label>
+          </div>
+          <div class="split-inputs">
+            <label>
+              Carbs (g)
+              <input
+                id="carbs"
+                type="number"
+                min="0"
+                placeholder="45"
+                value="0"
+              />
+            </label>
+            <label>
+              Fats (g)
+              <input
+                id="fats"
+                type="number"
+                min="0"
+                placeholder="15"
+                value="0"
+              />
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Meal</button>
+          <p id="addMealMessage" class="subtle"></p>
+        </form>
+
+        <section class="card templates-card">
+          <h3>Quick Add Templates</h3>
+          <div id="templateButtons" class="template-row"></div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Your Meal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home">
+    <div id="appShell" class="app-shell">
+      <section
+        id="splash"
+        class="screen splash-screen active-screen"
+        aria-label="Splash screen"
+      >
+        <div class="splash-content">
+          <p class="eyebrow">Track Your Meal</p>
+          <h1>Build better meals, one day at a time.</h1>
+          <p class="subtext">
+            Monitor calories and protein, stay consistent, and hit your goal.
+          </p>
+          <button id="startBtn" class="btn btn-primary">Start Tracking</button>
+        </div>
+      </section>
+
+      <main id="mainApp" class="main-app hidden" aria-live="polite">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Today</p>
+            <h2 id="todayDate">-</h2>
+          </div>
+          <span class="badge" id="dailyStatusBadge">On Track</span>
+        </header>
+
+        <nav class="card page-nav" aria-label="Primary navigation">
+          <a href="index.html" class="nav-btn active">Home</a>
+          <a href="add.html" class="nav-btn">Add Meal</a>
+          <a href="stats.html" class="nav-btn">Stats</a>
+          <a href="profile.html" class="nav-btn">Profile</a>
+        </nav>
+
+        <section id="homeScreen" class="screen" aria-label="Home">
+          <div class="card-grid">
+            <article class="card stat-card">
+              <p>Calories</p>
+              <h3 id="totalCalories">0</h3>
+            </article>
+            <article class="card stat-card">
+              <p>Protein</p>
+              <h3><span id="totalProtein">0</span> g</h3>
+            </article>
+            <article class="card stat-card full">
+              <div class="progress-head">
+                <p>Daily Protein Goal</p>
+                <strong id="goalText">0%</strong>
+              </div>
+              <div class="progress-track">
+                <div id="goalProgress" class="progress-fill"></div>
+              </div>
+            </article>
+          </div>
+
+          <section class="card meals-card">
+            <div class="list-head">
+              <h3>Meals</h3>
+              <input
+                id="mealSearch"
+                type="text"
+                placeholder="Search meals"
+                aria-label="Search meals"
+              />
+            </div>
+            <div id="mealFilters" class="filter-row"></div>
+            <ul id="mealList" class="meal-list"></ul>
+            <p id="emptyMealsHint" class="empty-hint">
+              No meals yet. Add one from Add Meal page.
+            </p>
+          </section>
+
+          <section class="card">
+            <h3>Smart Suggestions</h3>
+            <p class="subtle">Based on your remaining daily targets</p>
+            <ul id="suggestionList" class="suggestion-list"></ul>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

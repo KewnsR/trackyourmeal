@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stats - Track Your Meal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="stats">
+    <div class="app-shell">
+      <main class="main-app" aria-live="polite">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Progress</p>
+            <h2>Weekly Stats</h2>
+          </div>
+          <span class="badge">Insights</span>
+        </header>
+
+        <nav class="card page-nav" aria-label="Primary navigation">
+          <a href="index.html" class="nav-btn">Home</a>
+          <a href="add.html" class="nav-btn">Add Meal</a>
+          <a href="stats.html" class="nav-btn active">Stats</a>
+          <a href="profile.html" class="nav-btn">Profile</a>
+        </nav>
+
+        <section class="card">
+          <h3>Weekly Overview</h3>
+          <p class="subtle">Last 7 days of calories and protein</p>
+          <div id="weeklyBars" class="weekly-bars"></div>
+        </section>
+
+        <section class="card">
+          <h3>Weekly Totals</h3>
+          <p>Calories: <strong id="weeklyCalories">0</strong></p>
+          <p>Protein: <strong id="weeklyProtein">0</strong> g</p>
+          <p>Average protein/day: <strong id="weeklyAvgProtein">0</strong> g</p>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

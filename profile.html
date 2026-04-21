@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Track Your Meal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="profile">
+    <div class="app-shell">
+      <main class="main-app" aria-live="polite">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Health Planner</p>
+            <h2>Profile</h2>
+          </div>
+          <span class="badge">Personal</span>
+        </header>
+
+        <nav class="card page-nav" aria-label="Primary navigation">
+          <a href="index.html" class="nav-btn">Home</a>
+          <a href="add.html" class="nav-btn">Add Meal</a>
+          <a href="stats.html" class="nav-btn">Stats</a>
+          <a href="profile.html" class="nav-btn active">Profile</a>
+        </nav>
+
+        <section class="card profile-card">
+          <h3>Profile</h3>
+          <label>
+            Name
+            <input id="profileName" type="text" value="Meal Tracker User" />
+          </label>
+          <div class="split-inputs split-mobile">
+            <label>
+              Age
+              <input id="ageInput" type="number" min="13" max="90" value="25" />
+            </label>
+            <label>
+              Sex
+              <select id="sexInput">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </label>
+          </div>
+          <div class="split-inputs split-mobile">
+            <label>
+              Height (cm)
+              <input
+                id="heightInput"
+                type="number"
+                min="120"
+                max="230"
+                value="175"
+              />
+            </label>
+            <label>
+              Weight (kg)
+              <input
+                id="weightInput"
+                type="number"
+                min="35"
+                max="220"
+                value="70"
+              />
+            </label>
+          </div>
+          <label>
+            Activity
+            <select id="activityInput">
+              <option value="1.2">Sedentary</option>
+              <option value="1.375">Lightly active</option>
+              <option value="1.55" selected>Moderately active</option>
+              <option value="1.725">Very active</option>
+            </select>
+          </label>
+          <label>
+            Goal
+            <select id="goalInput">
+              <option value="cut">Fat Loss</option>
+              <option value="maintain" selected>Maintain</option>
+              <option value="bulk">Muscle Gain</option>
+            </select>
+          </label>
+          <label>
+            Daily Protein Goal (g)
+            <input
+              id="proteinGoalInput"
+              type="number"
+              min="20"
+              max="350"
+              value="140"
+            />
+          </label>
+          <button id="saveProfileBtn" class="btn btn-secondary">
+            Save Profile
+          </button>
+          <section class="metrics-grid">
+            <article class="mini-metric">
+              <p>BMI</p>
+              <h4 id="bmiValue">-</h4>
+            </article>
+            <article class="mini-metric">
+              <p>Daily Calories</p>
+              <h4 id="calorieGoalText">-</h4>
+            </article>
+            <article class="mini-metric">
+              <p>Daily Protein</p>
+              <h4 id="proteinGoalText">-</h4>
+            </article>
+          </section>
+          <p id="profileMessage" class="subtle"></p>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
