@@ -44,7 +44,7 @@ const mealTypes = [
   "All",
   "Breakfast",
   "Lunch",
-  "Pre-Workout",
+  "Afternoon Break",
   "Dinner",
   "Snack",
 ];
@@ -930,6 +930,9 @@ function renderProfile() {
   const proteinGoalInput = qs("proteinGoalInput");
   const saveProfileBtn = qs("saveProfileBtn");
   const bmiValue = qs("bmiValue");
+  const bmiScaleValue = qs("bmiScaleValue");
+  const bmiScaleMarker = qs("bmiScaleMarker");
+  const bmiCategoryText = qs("bmiCategoryText");
   const calorieGoalText = qs("calorieGoalText");
   const proteinGoalText = qs("proteinGoalText");
   const profileMessage = qs("profileMessage");
@@ -944,9 +947,33 @@ function renderProfile() {
     goalInput.value = state.goal;
     proteinGoalInput.value = state.proteinGoal;
 
-    bmiValue.textContent = calculateBmi(state.weightKg, state.heightCm).toFixed(
-      1,
-    );
+    const bmi = calculateBmi(state.weightKg, state.heightCm);
+    const bmiRounded = bmi.toFixed(1);
+    bmiValue.textContent = bmiRounded;
+    if (bmiScaleValue) {
+      bmiScaleValue.textContent = bmiRounded;
+    }
+
+    if (bmiCategoryText) {
+      if (bmi < 18.5) {
+        bmiCategoryText.textContent = "Category: Underweight";
+      } else if (bmi < 25) {
+        bmiCategoryText.textContent = "Category: Normal";
+      } else if (bmi < 30) {
+        bmiCategoryText.textContent = "Category: Overweight";
+      } else {
+        bmiCategoryText.textContent = "Category: Obesity";
+      }
+    }
+
+    if (bmiScaleMarker) {
+      const minBmi = 12;
+      const maxBmi = 40;
+      const clamped = Math.min(maxBmi, Math.max(minBmi, bmi));
+      const percent = ((clamped - minBmi) / (maxBmi - minBmi)) * 100;
+      bmiScaleMarker.style.left = `calc(${percent}% - 7px)`;
+    }
+
     calorieGoalText.textContent = `${state.calorieGoal} kcal`;
     proteinGoalText.textContent = `${state.proteinGoal} g`;
   }

@@ -479,6 +479,103 @@ a.nav-btn {
   color: var(--brand-deep);
 }
 
+.bmi-scale-panel {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fbfefc 0%, #f3faf6 100%);
+  padding: 12px;
+}
+
+.bmi-scale-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bmi-scale-head p,
+.bmi-scale-head strong {
+  margin: 0;
+}
+
+.bmi-scale-head strong {
+  color: var(--brand-deep);
+}
+
+.bmi-scale-wrap {
+  display: grid;
+  gap: 6px;
+}
+
+.bmi-scale-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6.5fr 6.5fr 5fr 10fr;
+  gap: 4px;
+}
+
+.bmi-segment {
+  height: 14px;
+  border-radius: 999px;
+}
+
+.bmi-under {
+  background: #3b82f6;
+}
+
+.bmi-normal {
+  background: #22a06b;
+}
+
+.bmi-over {
+  background: #f0b429;
+}
+
+.bmi-obese {
+  background: #d14343;
+}
+
+.bmi-scale-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #1f2f24;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(31, 47, 36, 0.15);
+  left: 0;
+  transition: left 0.3s ease;
+}
+
+.bmi-scale-labels {
+  display: grid;
+  grid-template-columns: 6.5fr 6.5fr 5fr 10fr;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.bmi-scale-labels span:nth-child(1) {
+  color: #2f6ecf;
+}
+
+.bmi-scale-labels span:nth-child(2) {
+  color: #1f8457;
+}
+
+.bmi-scale-labels span:nth-child(3) {
+  color: #b48316;
+}
+
+.bmi-scale-labels span:nth-child(4) {
+  color: #ab3333;
+}
+
+.bmi-category-text {
+  margin: 8px 0 0;
+}
+
 @media (min-width: 760px) {
   .main-app {
     grid-template-columns: 1fr;
