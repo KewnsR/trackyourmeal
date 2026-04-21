@@ -95,6 +95,131 @@ const foodDb = {
     per100: { calories: 265, protein: 9, carbs: 49, fats: 3.2 },
     units: { gram: 1, slice: 30 },
   },
+  "chicken adobo": {
+    display: "Chicken Adobo",
+    per100: { calories: 210, protein: 20, carbs: 4, fats: 12 },
+    units: { gram: 1, serving: 220, cup: 200 },
+  },
+  "pork adobo": {
+    display: "Pork Adobo",
+    per100: { calories: 290, protein: 18, carbs: 4, fats: 22 },
+    units: { gram: 1, serving: 220, cup: 200 },
+  },
+  sinigang: {
+    display: "Sinigang",
+    per100: { calories: 95, protein: 8, carbs: 6, fats: 4 },
+    units: { gram: 1, bowl: 320, serving: 300 },
+  },
+  tinola: {
+    display: "Tinola",
+    per100: { calories: 105, protein: 11, carbs: 4, fats: 5 },
+    units: { gram: 1, bowl: 320, serving: 300 },
+  },
+  "kare-kare": {
+    display: "Kare-Kare",
+    per100: { calories: 230, protein: 11, carbs: 10, fats: 16 },
+    units: { gram: 1, serving: 250, cup: 220 },
+  },
+  sisig: {
+    display: "Sisig",
+    per100: { calories: 265, protein: 16, carbs: 5, fats: 20 },
+    units: { gram: 1, serving: 180, plate: 200 },
+  },
+  "bicol express": {
+    display: "Bicol Express",
+    per100: { calories: 265, protein: 10, carbs: 6, fats: 22 },
+    units: { gram: 1, serving: 220, cup: 200 },
+  },
+  laing: {
+    display: "Laing",
+    per100: { calories: 185, protein: 4, carbs: 8, fats: 15 },
+    units: { gram: 1, serving: 180, cup: 170 },
+  },
+  menudo: {
+    display: "Menudo",
+    per100: { calories: 180, protein: 10, carbs: 11, fats: 10 },
+    units: { gram: 1, serving: 240, cup: 220 },
+  },
+  afritada: {
+    display: "Afritada",
+    per100: { calories: 170, protein: 12, carbs: 9, fats: 9 },
+    units: { gram: 1, serving: 240, cup: 220 },
+  },
+  kaldereta: {
+    display: "Kaldereta",
+    per100: { calories: 220, protein: 13, carbs: 8, fats: 14 },
+    units: { gram: 1, serving: 240, cup: 220 },
+  },
+  pochero: {
+    display: "Pochero",
+    per100: { calories: 145, protein: 9, carbs: 10, fats: 7 },
+    units: { gram: 1, bowl: 320, serving: 300 },
+  },
+  "nilagang baka": {
+    display: "Nilagang Baka",
+    per100: { calories: 140, protein: 11, carbs: 7, fats: 7 },
+    units: { gram: 1, bowl: 320, serving: 300 },
+  },
+  bulalo: {
+    display: "Bulalo",
+    per100: { calories: 125, protein: 10, carbs: 3, fats: 8 },
+    units: { gram: 1, bowl: 350, serving: 320 },
+  },
+  "pancit bihon": {
+    display: "Pancit Bihon",
+    per100: { calories: 165, protein: 7, carbs: 24, fats: 4 },
+    units: { gram: 1, serving: 230, plate: 250 },
+  },
+  "pancit canton": {
+    display: "Pancit Canton",
+    per100: { calories: 185, protein: 7, carbs: 26, fats: 6 },
+    units: { gram: 1, serving: 230, plate: 250 },
+  },
+  palabok: {
+    display: "Palabok",
+    per100: { calories: 200, protein: 8, carbs: 24, fats: 8 },
+    units: { gram: 1, serving: 230, plate: 250 },
+  },
+  "lumpia shanghai": {
+    display: "Lumpia Shanghai",
+    per100: { calories: 280, protein: 10, carbs: 17, fats: 19 },
+    units: { gram: 1, piece: 25, serving: 120 },
+  },
+  "chicken inasal": {
+    display: "Chicken Inasal",
+    per100: { calories: 205, protein: 24, carbs: 2, fats: 11 },
+    units: { gram: 1, serving: 200, piece: 150 },
+  },
+  tapsilog: {
+    display: "Tapsilog",
+    per100: { calories: 225, protein: 10, carbs: 24, fats: 10 },
+    units: { gram: 1, serving: 350, plate: 380 },
+  },
+  tosilog: {
+    display: "Tosilog",
+    per100: { calories: 240, protein: 8, carbs: 26, fats: 12 },
+    units: { gram: 1, serving: 350, plate: 380 },
+  },
+  longsilog: {
+    display: "Longsilog",
+    per100: { calories: 255, protein: 8, carbs: 25, fats: 14 },
+    units: { gram: 1, serving: 350, plate: 380 },
+  },
+  "bangus sisig": {
+    display: "Bangus Sisig",
+    per100: { calories: 185, protein: 16, carbs: 4, fats: 11 },
+    units: { gram: 1, serving: 180, plate: 200 },
+  },
+  "ginataang gulay": {
+    display: "Ginataang Gulay",
+    per100: { calories: 145, protein: 4, carbs: 10, fats: 10 },
+    units: { gram: 1, serving: 220, cup: 200 },
+  },
+  "ginisang monggo": {
+    display: "Ginisang Monggo",
+    per100: { calories: 135, protein: 7, carbs: 16, fats: 5 },
+    units: { gram: 1, bowl: 280, serving: 250 },
+  },
 };
 
 const runtime = {
@@ -229,6 +354,10 @@ function normalizeFoodKey(text) {
 function inferPer100FromName(foodName) {
   const name = normalizeFoodKey(foodName);
   const profiles = [
+    {
+      test: /adobo|sinigang|tinola|kare|sisig|bicol|laing|menudo|afritada|kaldereta|pochero|nilaga|bulalo|pancit|palabok|lumpia|inasal|silog|monggo|ginataan/,
+      per100: { calories: 190, protein: 11, carbs: 13, fats: 10 },
+    },
     {
       test: /chicken|tuna|fish|beef|meat|turkey|egg|protein/,
       per100: { calories: 170, protein: 27, carbs: 1, fats: 6 },
@@ -506,6 +635,8 @@ function renderHome() {
 
 function resolveFoodKey(inputText) {
   const normalized = normalizeFoodKey(inputText);
+  const compact = normalized.replace(/[^a-z0-9]/g, "");
+
   const exact = Object.keys(foodDb).find(
     (key) =>
       key === normalized || foodDb[key].display.toLowerCase() === normalized,
@@ -513,9 +644,24 @@ function resolveFoodKey(inputText) {
   if (exact) {
     return exact;
   }
+
+  const compactMatch = Object.keys(foodDb).find((key) => {
+    const keyCompact = key.replace(/[^a-z0-9]/g, "");
+    const displayCompact = foodDb[key].display
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
+    return keyCompact === compact || displayCompact === compact;
+  });
+  if (compactMatch) {
+    return compactMatch;
+  }
+
   return (
     Object.keys(foodDb).find(
-      (key) => key.includes(normalized) || normalized.includes(key),
+      (key) =>
+        key.includes(normalized) ||
+        normalized.includes(key) ||
+        foodDb[key].display.toLowerCase().includes(normalized),
     ) || null
   );
 }
