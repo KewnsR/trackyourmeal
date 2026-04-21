@@ -75,6 +75,11 @@ const foodDb = {
     per100: { calories: 89, protein: 1.1, carbs: 22.8, fats: 0.3 },
     units: { gram: 1, medium: 118, large: 136 },
   },
+  pizza: {
+    display: "Pizza",
+    per100: { calories: 266, protein: 11, carbs: 33, fats: 10 },
+    units: { slice: 100, small: 85, medium: 107, large: 130 },
+  },
   "greek yogurt": {
     display: "Greek Yogurt",
     per100: { calories: 97, protein: 10, carbs: 3.9, fats: 5 },
@@ -673,6 +678,7 @@ function estimateFoodNutrition(foodKey, quantity, unitKey) {
     const factor = grams / 100;
     return {
       foodLabel: runtime.inferredFood.display,
+      unitLabel: unitKey === "serving" ? "serving" : "gram",
       grams: Math.round(grams),
       calories: Math.round(runtime.inferredFood.per100.calories * factor),
       protein: Math.round(runtime.inferredFood.per100.protein * factor),
@@ -690,6 +696,15 @@ function estimateFoodNutrition(foodKey, quantity, unitKey) {
   const factor = grams / 100;
   return {
     foodLabel: food.display,
+    unitLabel:
+      foodKey === "pizza"
+        ? {
+            slice: "slice",
+            small: "small slice",
+            medium: "medium slice",
+            large: "large slice",
+          }[unitKey] || unitKey
+        : unitKey,
     grams: Math.round(grams),
     calories: Math.round(food.per100.calories * factor),
     protein: Math.round(food.per100.protein * factor),
@@ -716,7 +731,18 @@ function renderFoodUnits(foodUnit, foodKey) {
 
   const units = Object.keys(foodDb[foodKey].units);
   foodUnit.innerHTML = units
-    .map((unit) => `<option value="${unit}">${unit}</option>`)
+    .map((unit) => {
+      const label =
+        foodKey === "pizza"
+          ? {
+              slice: "slice",
+              small: "small slice",
+              medium: "medium slice",
+              large: "large slice",
+            }[unit] || unit
+          : unit;
+      return `<option value="${unit}">${label}</option>`;
+    })
     .join("");
 }
 
@@ -769,7 +795,7 @@ function renderAddMeal() {
       return;
     }
 
-    foodEstimate.textContent = `${quantity} ${unit} (${estimate.grams}g): ${estimate.calories} kcal, ${estimate.protein}g protein, ${estimate.carbs}g carbs, ${estimate.fats}g fats`;
+    foodEstimate.textContent = `${quantity} ${estimate.unitLabel} (${estimate.grams}g): ${estimate.calories} kcal, ${estimate.protein}g protein, ${estimate.carbs}g carbs, ${estimate.fats}g fats`;
   }
 
   foodInput.addEventListener("input", () => {
@@ -805,7 +831,7 @@ function renderAddMeal() {
       return;
     }
 
-    mealName.value = `${estimate.foodLabel} (${quantity} ${unit})`;
+    mealName.value = `${estimate.foodLabel} (${quantity} ${estimate.unitLabel})`;
     calories.value = estimate.calories;
     protein.value = estimate.protein;
     carbs.value = estimate.carbs;
