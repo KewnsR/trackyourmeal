@@ -80,6 +80,11 @@ const foodDb = {
     per100: { calories: 266, protein: 11, carbs: 33, fats: 10 },
     units: { slice: 100, small: 85, medium: 107, large: 130 },
   },
+  creatine: {
+    display: "Creatine",
+    per100: { calories: 0, protein: 0, carbs: 0, fats: 0 },
+    units: { scoop: 5, double: 10, container: 300 },
+  },
   "greek yogurt": {
     display: "Greek Yogurt",
     per100: { calories: 97, protein: 10, carbs: 3.9, fats: 5 },
@@ -374,6 +379,10 @@ function inferPer100FromName(foodName) {
     {
       test: /nuts|peanut|butter|oil|avocado|cheese/,
       per100: { calories: 520, protein: 14, carbs: 12, fats: 44 },
+    },
+    {
+      test: /creatine|supplement|monohydrate|preworkout|pre-workout/,
+      per100: { calories: 0, protein: 0, carbs: 0, fats: 0 },
     },
     {
       test: /vegetable|salad|broccoli|spinach|cucumber|tomato/,
@@ -746,6 +755,24 @@ function renderFoodUnits(foodUnit, foodKey) {
     .join("");
 }
 
+function updateFoodQuantityRules(foodQuantity, foodKey) {
+  if (!foodQuantity) {
+    return;
+  }
+
+  if (foodKey === "creatine") {
+    foodQuantity.min = "1";
+    foodQuantity.step = "1";
+    if (Number(foodQuantity.value) < 1) {
+      foodQuantity.value = "1";
+    }
+    return;
+  }
+
+  foodQuantity.min = "0.25";
+  foodQuantity.step = "0.25";
+}
+
 function renderAddMeal() {
   const form = qs("addMealForm");
   if (!form) {
@@ -810,6 +837,7 @@ function renderAddMeal() {
     }
 
     renderFoodUnits(foodUnit, runtime.selectedFoodKey);
+    updateFoodQuantityRules(foodQuantity, runtime.selectedFoodKey);
     drawEstimate();
   });
 
@@ -897,6 +925,7 @@ function renderAddMeal() {
   });
 
   renderFoodUnits(foodUnit, null);
+  updateFoodQuantityRules(foodQuantity, null);
 }
 
 function renderStats() {
