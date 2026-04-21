@@ -15,6 +15,28 @@ A modern, mobile-first meal tracking UI built with plain HTML, CSS, and JavaScri
 
 Open `index.html` directly in a browser, or serve the folder with any static file server.
 
+### SQLite save mode (no npm required)
+
+If npm is not working, run the app with the built-in Python server that uses SQLite:
+
+```bash
+python server.py
+```
+
+Then open:
+
+```text
+http://127.0.0.1:4173
+```
+
+Data is saved in:
+
+```text
+data/trackyourmeal.sqlite
+```
+
+The app still keeps a localStorage backup if the server is unavailable.
+
 For example:
 
 ```bash

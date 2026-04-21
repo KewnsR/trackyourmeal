@@ -102,6 +102,8 @@ const runtime = {
   searchTerm: "",
   selectedFoodKey: null,
   inferredFood: null,
+  sqliteAvailable: false,
+  sqliteSyncInFlight: false,
 };
 
 const state = loadState();
@@ -125,6 +127,66 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  queueSQLiteSave();
+}
+
+let sqliteSaveTimer;
+
+function mergeLoadedState(nextState) {
+  if (!nextState || typeof nextState !== "object") {
+    return;
+  }
+
+  const merged = {
+    ...structuredClone(defaultState),
+    ...nextState,
+    meals: Array.isArray(nextState.meals) ? nextState.meals : [],
+  };
+
+  Object.assign(state, merged);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+async function tryLoadStateFromSQLite() {
+  try {
+    const response = await fetch("/api/state", { method: "GET" });
+    if (!response.ok) {
+      return;
+    }
+
+    const payload = await response.json();
+    mergeLoadedState(payload.state);
+    runtime.sqliteAvailable = true;
+  } catch {
+    runtime.sqliteAvailable = false;
+  }
+}
+
+async function pushStateToSQLite() {
+  if (runtime.sqliteSyncInFlight) {
+    return;
+  }
+
+  runtime.sqliteSyncInFlight = true;
+  try {
+    const response = await fetch("/api/state", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ state }),
+    });
+    runtime.sqliteAvailable = response.ok;
+  } catch {
+    runtime.sqliteAvailable = false;
+  } finally {
+    runtime.sqliteSyncInFlight = false;
+  }
+}
+
+function queueSQLiteSave() {
+  clearTimeout(sqliteSaveTimer);
+  sqliteSaveTimer = setTimeout(() => {
+    void pushStateToSQLite();
+  }, 120);
 }
 
 function qs(id) {
@@ -758,7 +820,8 @@ function renderProfile() {
   });
 }
 
-function initPage() {
+async function initPage() {
+  await tryLoadStateFromSQLite();
   const page = document.body.dataset.page;
   if (page === "home") {
     renderHome();
@@ -774,4 +837,4 @@ function initPage() {
   }
 }
 
-initPage();
+void initPage();
